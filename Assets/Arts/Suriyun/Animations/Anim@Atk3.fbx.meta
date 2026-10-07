@@ -1149,7 +1149,7 @@ ModelImporter:
       takeName: Aki@ATK3
       internalID: 0
       firstFrame: 269
-      lastFrame: 290
+      lastFrame: 291
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1169,8 +1169,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.39246324
-        functionName: ShotEvent
+      - time: 0.70524865
+        functionName: AttackEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9715073
+        functionName: AttackFinish
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

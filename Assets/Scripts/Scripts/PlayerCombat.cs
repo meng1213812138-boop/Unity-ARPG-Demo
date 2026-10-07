@@ -6,13 +6,14 @@ public class PlayerCombat : MonoBehaviour
 {
     public enum PlayerState
     {
-        Idel,
+        Idle,
         Move,
         Jump,
         Attack,
         Dead
     }
-    public PlayerState currentState = PlayerState.Idel;
+    private HashSet<EnemyObject> hitEnemies = new HashSet<EnemyObject>();
+    public PlayerState currentState = PlayerState.Idle;
     public Transform attackPoint;
     public float attackRange = 1.5f;
     public LayerMask ememyLayer;
@@ -28,36 +29,44 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //if(currentState == PlayerState.Attack)
-            //    return;
-            //currentState = PlayerState.Attack;
-            animator.SetTrigger("Attack");
-            AttackEvent();
+            if (currentState != PlayerState.Attack)
+            {
+                hitEnemies.Clear();
+                currentState = PlayerState.Attack;
+                animator.SetTrigger("Attack");
+            }
         }
     }
     public void AttackEvent()
     {
-        Debug.Log("检测是否触发攻击");
+        //Debug.Log("检测是否触发攻击");
 
-        Collider[] hitEnemies = Physics.OverlapSphere(
+        Collider[] hitColliders = Physics.OverlapSphere(
             attackPoint.position,
             attackRange,
             ememyLayer
             );
 
-        foreach(Collider enemy in hitEnemies)
+        foreach(Collider hitCollider in hitColliders)
         {
-            enemy health = enemy.GetComponent<enemy>();
-            Debug.Log("打到了：" + enemy.name);
-
-            if (health !=null)
+            EnemyObject health = hitCollider.GetComponent<EnemyObject>();
+            if (health != null && !hitEnemies.Contains(health)) 
             {
-                health.takeDamage(1);
+                hitEnemies.Add(health);
+                health.TakeDamage(1);
+                //Debug.Log("打到了：" + hitCollider.name);
             }
         }
     }
+    /// <summary>
+    /// 播放攻击动画完成后的方法
+    /// </summary>
     public void AttackFinish()
     {
-        currentState = PlayerState.Idel;
+        currentState = PlayerState.Idle;
+    }
+    public void EnableCombo()
+    {
+        //Debug.Log(1);
     }
 }

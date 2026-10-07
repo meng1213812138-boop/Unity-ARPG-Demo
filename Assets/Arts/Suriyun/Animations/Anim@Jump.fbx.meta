@@ -1100,7 +1100,8 @@ ModelImporter:
       to improve retargeting quality.\n\t'RootPart1_M' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Scapula_R' has translation
       animation that will be discarded.\n\t'Scapula_L' has translation animation
-      that will be discarded.\n"
+      that will be discarded.\nEvent OverJump has a time (1.746295) outside the clip's
+      valid range (0.000000..1.633333). It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
